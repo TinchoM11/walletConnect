@@ -10,12 +10,12 @@ import {
   darkTheme,
 } from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { mainnet, polygon, optimism, arbitrum, bsc } from "wagmi/chains";
+import { mainnet, polygon, optimism, arbitrum, bsc, avalanche, fantom} from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 
 const { chains, publicClient } = configureChains(
-  [mainnet, polygon, optimism, arbitrum, bsc],
+  [mainnet, polygon, optimism, arbitrum, bsc, avalanche, fantom],
   [
     alchemyProvider({ apiKey: "6d3AQnuWzbFLVJSOCXh_Fd2moB7TDqJp" }), // AlchemyId
     publicProvider(),

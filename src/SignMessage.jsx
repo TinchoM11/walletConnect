@@ -2,7 +2,7 @@ import * as React from "react";
 import { useAccount, useSignMessage } from "wagmi";
 import { recoverMessageAddress } from "viem";
 
-export function SignMessage() {
+export default function SignMessage() {
   const { data, error, isLoading, signMessage, variables } = useSignMessage();
   const { address } = useAccount();
   const [recoveredAddress, setRecoveredAddress] = React.useState("");
