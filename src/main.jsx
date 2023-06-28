@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
+import App from './App.jsx'
 import "./index.css";
 
 import "@rainbow-me/rainbowkit/styles.css";
@@ -34,7 +34,7 @@ const wagmiConfig = createConfig({
   publicClient,
 });
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider
@@ -42,7 +42,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         chains={chains}
         modalSize="compact"
       >
-        <App />
+        <App/>  
       </RainbowKitProvider>
     </WagmiConfig>
   </React.StrictMode>
