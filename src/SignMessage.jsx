@@ -5,20 +5,16 @@ import { recoverMessageAddress } from "viem";
 export function SignMessage() {
   const { data, error, isLoading, signMessage, variables } = useSignMessage();
   const { address } = useAccount();
+  const [recoveredAddress, setRecoveredAddress] = React.useState("");
 
   React.useEffect(() => {
     (async () => {
       if (variables?.message) {
-        const recoveredAddress = await recoverMessageAddress({
+        const recovered = await recoverMessageAddress({
           message: variables?.message,
           signature: data,
         });
-
-        console.log("Address Recovered:", recoveredAddress);
-        console.log(
-          "Equals wallet expected:",
-          recoveredAddress === "0xAE13fCFb77eb02361C196e30105E91867AfaC369"
-        );
+        setRecoveredAddress(recovered);
       }
     })();
   }, [data, variables?.message]);
@@ -51,8 +47,8 @@ export function SignMessage() {
         name="message"
         placeholder="Sign this message to prove you own this address"
         style={{
-          width: "100%",
-          minHeight: "100px",
+          width: "90%",
+          minHeight: "50px",
           borderRadius: "4px",
           padding: "5px",
         }}
@@ -66,13 +62,26 @@ export function SignMessage() {
           border: "none",
           borderRadius: "25px",
           padding: "10px",
-          width: "100%",
+          width: "50%",
         }}
       >
         {isLoading ? "Check Wallet" : "Sign Message"}
       </button>
       {data && (
         <div style={{ marginTop: "20px", color: "white" }}>
+          {recoveredAddress === address ? (
+            <div>
+              <div style={{ marginBottom: "5px" }}>
+                ¡Address Recovered Match with Expected! ✅
+              </div>
+            </div>
+          ) : (
+            <div>
+              <div style={{ marginBottom: "5px" }}>
+                ¡Address Recovered Doesn't Match with Expected! ❌
+              </div>
+            </div>
+          )}
           <div style={{ marginBottom: "5px" }}>Signature:</div>
           <div
             style={{
@@ -92,7 +101,7 @@ export function SignMessage() {
       )}
 
       {error && (
-        <div style={{ marginTop: "20px", color: "white" }}>{error.message}</div>
+        <div style={{ marginTop: "10px", color: "white" }}>{error.message}</div>
       )}
     </form>
   );
