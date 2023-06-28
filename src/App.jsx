@@ -13,8 +13,8 @@ function App() {
 
   // Just for testing purposes, simulated database of users
   const initialUserData = [
-    { address: "0xAE13fCFb77eb02361C196e30105E91867AfaC369", email: "tincho@gmail.com" },
-    { address: "0xF8B56939fF7246142211Ab7b136EB2Ea061046e5", email: "tincho2@gmail.com"}
+    { address: "0xAE13fCFb7aeb12361C186e30105H91867AfaC468", email: "tincho@gmail.com" },
+    { address: "0xD4B56839bF7246142222Ab7b136EC2Ea061043e4", email: "tincho2@gmail.com"}
   ];
   const [userData, setUserData] = useState(initialUserData);
 
