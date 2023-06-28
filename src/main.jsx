@@ -10,7 +10,15 @@ import {
   darkTheme,
 } from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { mainnet, polygon, optimism, arbitrum, bsc, avalanche, fantom} from "wagmi/chains";
+import {
+  polygon,
+  mainnet,
+  optimism,
+  arbitrum,
+  bsc,
+  avalanche,
+  fantom,
+} from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 
@@ -34,7 +42,7 @@ const wagmiConfig = createConfig({
   publicClient,
 });
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider
