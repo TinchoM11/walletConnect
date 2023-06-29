@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useAccount } from "wagmi";
+import { useAccount, useNetwork } from "wagmi";
 import "./App.css";
 import LinkWithEmail from "./LinkWithEmail";
 import SignMessage from "./SignMessage";

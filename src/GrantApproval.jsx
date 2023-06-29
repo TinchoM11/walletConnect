@@ -1,21 +1,39 @@
 import { ethers } from "ethers";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   usePrepareContractWrite,
   useContractWrite,
   useWaitForTransaction,
   erc20ABI,
+  useNetwork,
 } from "wagmi";
 
 const GrantApproval = () => {
   const [spenderAddress, setSpenderAddress] = useState("");
-  const amountToApprove = "10000000"; //  10 USDC
+  const [chainUSDCAddress, setChainUSDCAddress] = useState("");
+  const { chain } = useNetwork();
+
+  useEffect(() => {
+    setChainUSDCAddress(USDCAddresses[chain.id]);
+  }, [chain.id]);
+
+  const USDCAddresses = {
+    1: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48", // USDC Contract Address on Ethereum
+    137: "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174", // USDC Contract Address on Polygon
+    56: "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d", // USDC Contract Address on BSC
+    10: "0x7f5c764cbc14f9669b88837ca1490cca17c31607", // USDC Contract Address on Optimism
+    43114: "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E", // USDC Contract Address on Avalanche
+    42161: "0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8", // USDC Contract Address on Arbitrum
+    250: "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75", // USDC Contract Address on Fantom
+  };
+
+  const amountToApprove = chain.id === 56 ? "10000000000000000000" : "10000000"
   const {
     config,
     error: prepareError,
     isError: isPrepareError,
   } = usePrepareContractWrite({
-    address: "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174", // USDC Contract Address on Polygon
+    address: chainUSDCAddress, // USDC Contract Address
     abi: erc20ABI,
     functionName: "approve",
     args: [spenderAddress, amountToApprove], // Spender and Amount to approve
@@ -81,7 +99,9 @@ const GrantApproval = () => {
           Successfully Granted Approval
           <div>
             <p>Tx Hash: {data?.hash}</p>
-            <a href={`https://polygonscan.com/tx/${data?.hash}`}>View on Polygonscan</a>
+            <a href={`https://polygonscan.com/tx/${data?.hash}`}>
+              View on Polygonscan
+            </a>
           </div>
         </div>
       )}

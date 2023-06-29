@@ -72,13 +72,13 @@ export default function SignMessage() {
           {recoveredAddress === address ? (
             <div>
               <div style={{ marginBottom: "5px" }}>
-                ¡Address Recovered Match with Expected! ✅
+                Address Recovered Match with Expected! ✅
               </div>
             </div>
           ) : (
             <div>
               <div style={{ marginBottom: "5px" }}>
-                ¡Address Recovered Doesn't Match with Expected! ❌
+                Address Recovered Doesn't Match with Expected! ❌
               </div>
             </div>
           )}
